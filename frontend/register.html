@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | FIT FOR ALL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">FIT FOR ALL</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="login.html" class="nav-btn" data-auth="guest">Log In</a>
+            <a href="profile.html" data-auth="member" style="display: none;">Profile</a>
+            <a href="login.html" class="nav-btn" data-auth="member" data-auth-action="logout" style="display: none;">Log Out</a>
+        </div>
+    </nav>
+
+    <main class="auth-page">
+        <section class="auth-card" aria-labelledby="register-title">
+            <h1 id="register-title">Start stronger.</h1>
+            <p>Create your account and make your health goals personal.</p>
+
+            <form class="auth-form" id="register-form">
+                <div class="form-field">
+                    <label for="register-name">Full name</label>
+                    <input id="register-name" name="name" type="text" autocomplete="name" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="register-email">Email address</label>
+                    <input id="register-email" name="email" type="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="register-password">Password</label>
+                    <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" required>
+                </div>
+
+                <!-- <div class="form-field">
+                    <label for="register-goal">Primary goal</label>
+                    <select id="register-goal" name="goal" required>
+                        <option value="" selected disabled>Choose a goal</option>
+                        <option value="weight-loss">Weight loss</option>
+                        <option value="muscle-gain">Muscle gain</option>
+                        <option value="fitness">General fitness</option>
+                    </select>
+                </div> -->
+
+                <button class="auth-submit" type="submit">Create Account</button>
+            </form>
+
+            <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script>
+        const registerForm = document.getElementById("register-form");
+
+        registerForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("register-name").value;
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
+
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/auth/register`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.detail || "Registration failed");
+                    return;
+                }
+
+                alert("Account created successfully!");
+
+                window.location.href = "login.html";
+
+            } catch (error) {
+                console.error(error);
+                alert("Could not connect to the server.");
+            }
+        });
+    </script>
+<script src="js/nav.js"></script>
+</body>
+
+</html>

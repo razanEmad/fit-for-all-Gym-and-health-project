@@ -1,0 +1,115 @@
+:root {
+    --primary: #C95C2C;
+    --primary-light: #F6D8C2;
+    --primary-soft: #E9A67C;
+    --primary-strong: #A84B23;
+
+    --accent: #7F1D1D;
+    --accent-soft: #B6604E;
+
+    --dark: #111111;
+    --dark-alt: #1A1A1A;
+    --dark-elevated: #202020;
+
+    --background: #F4EFEA;
+    --background-soft: #EAE0D7;
+    --surface: #FFFFFF;
+    --surface-strong: #F8F3EE;
+
+    --text-primary: #1B1B1B;
+    --text-secondary: #5F554E;
+    --white: #FFFDFB;
+
+    --border: #D9C9BC;
+    --shadow: rgba(0, 0, 0, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #F4EFEA 0%, #EEE5DD 100%);
+    color: var(--text-primary);
+    padding-top: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+    padding: 20px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgba(11, 11, 11, 0.92);
+    color: var(--white);
+
+    border-bottom: 1px solid rgba(201, 92, 44, 0.55);
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--white);
+
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-size: 16px;
+    color: var(--white);
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-btn {
+    padding: 10px 16px;
+
+    border-radius: 6px;
+
+    background-color: var(--primary);
+    color: var(--dark);
+
+    font-weight: 700;
+}
+
+.nav-btn:hover {
+    color: var(--dark) !important;
+    opacity: 0.88;
+}
+

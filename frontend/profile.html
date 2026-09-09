@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIT FOR ALL</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            FIT FOR ALL
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html" class="nav-btn" data-auth-action="logout">Log Out</a>
+        </div>
+
+    </nav>
+
+    <main class="home">
+
+        <section class="welcome">
+
+            <h1>Hi, <span id="user-name">User</span></h1>
+
+            <p>Your goal: <strong id="user-goal">Loading...</strong></p>
+
+        </section>
+
+
+        <section class="features">
+
+            <h2>What do you want to do?</h2>
+
+            <div class="feature-cards">
+
+                <div class="feature-card">
+                    <span class="feature-icon">
+                        <img src="images/dumble.png" alt="Gym Coach">
+                    </span>
+
+                    <h3>AI Gym Coach</h3>
+
+                    <p>Scan a gym machine</p>
+
+                    <span class="card-arrow">→</span>
+                </div>
+
+
+                <div class="feature-card">
+                    <span class="feature-icon">
+                        <img src="images/plate2.png" alt="Food Scanner">
+                    </span>
+
+                    <h3>Food Scanner</h3>
+
+                    <p>Analyze your meal</p>
+
+                    <span class="card-arrow">→</span>
+                </div>
+
+
+                <div class="feature-card">
+                    <span class="feature-icon">
+                        <img src="images/cart.png" alt="Product Scanner">
+                    </span>
+
+                    <h3>Product Scanner</h3>
+
+                    <p>Is this good for me?</p>
+
+                    <span class="card-arrow">→</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="profile-summary">
+
+            <h2>Your Profile</h2>
+
+            <div class="profile-info">
+
+                <div>
+                    <span>Weight</span>
+                    <strong id="user-weight">Loading...</strong>
+                </div>
+
+                <div>
+                    <span>Height</span>
+                    <strong id="user-height">Loading...</strong>
+                </div>
+
+                <div>
+                    <span>Goal</span>
+                    <strong id="summary-goal">Loading...</strong>
+                </div>
+
+            </div>
+
+            <div class="profile-actions-row">
+                <a href="personal-data.html" class="secondary-btn">
+                    Update Personal Data
+                </a>
+                <a href="update-profile.html" class="update-btn">
+                    Update Profile
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script>
+    async function loadProfile() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}/api/profile/`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (response.status === 401) {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const data = await response.json();
+
+            console.log("Profile:", data);
+
+            // Display profile data
+            document.getElementById("user-name").textContent = data.name;
+
+            document.getElementById("user-weight").textContent =
+                `${data.weight} kg`;
+
+            document.getElementById("user-height").textContent =
+                `${data.height} cm`;
+
+            document.getElementById("user-goal").textContent =
+                formatGoal(data.goal);
+
+            document.getElementById("summary-goal").textContent =
+                formatGoal(data.goal);
+
+        } catch (error) {
+            console.error("Error loading profile:", error);
+        }
+    }
+
+    function formatGoal(goal) {
+        if (goal === "weight-loss") {
+            return "Weight Loss";
+        }
+
+        if (goal === "muscle-gain") {
+            return "Muscle Gain";
+        }
+
+        if (goal === "fitness") {
+            return "General Fitness";
+        }
+
+        return goal;
+    }
+
+    loadProfile();
+
+    document.getElementById("logout-link").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        localStorage.removeItem("token");
+
+        window.location.href = "login.html";
+    });
+</script>
+<script src="js/nav.js"></script>
+
+</body>
+
+</html>
