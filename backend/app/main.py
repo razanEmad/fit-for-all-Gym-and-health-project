@@ -5,6 +5,7 @@ from app.database import users_collection
 from app.routes.profile import router as profile_router
 from app.routes.auth import router as auth_router
 from fastapi.middleware.cors import CORSMiddleware
+from app.routes.gym import router as gym_router
 
 
 app = FastAPI(title="Fit For All API")
@@ -23,7 +24,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(profile_router)
 #Hey FastAPI, take all the endpoints inside profile_router and add them to my application
-
+app.include_router(gym_router)
 
 #When someone sends a GET request to /, run the function below
 @app.get("/")
