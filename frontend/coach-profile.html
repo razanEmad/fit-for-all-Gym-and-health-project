@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Profile | FIT FOR ALL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/coaches.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">FIT FOR ALL</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="coaches.html">Coaches</a>
+            <a href="login.html" class="nav-btn" data-auth-action="logout">Log Out</a>
+        </div>
+    </nav>
+
+    <main class="coach-profile-shell">
+
+        <section class="coach-profile-card" id="coach-profile-card">
+
+            <div class="coach-profile-left">
+                <div class="coach-profile-avatar" id="coach-avatar">A</div>
+                <h2 id="coach-name">Coach Name</h2>
+                <div id="coach-role" class="coach-profile-role">Coach Role</div>
+
+                <div class="coach-tags" id="coach-tags"></div>
+
+                <div class="coach-profile-meta">
+                    <div class="coach-stat">
+                        <span>Rating</span>
+                        <strong id="coach-rating">4.9</strong>
+                    </div>
+                    <div class="coach-stat">
+                        <span>Clients</span>
+                        <strong id="coach-clients">1.2k</strong>
+                    </div>
+                    <div class="coach-stat">
+                        <span>Price</span>
+                        <strong id="coach-price">$29/mo</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coach-profile-right">
+                <h3>About this coach</h3>
+                <p id="coach-bio" class="coach-profile-bio">
+                    Loading coach details...
+                </p>
+
+                <div class="coach-services">
+                    <div class="service-box">
+                        <h4>Weekly Check-ins</h4>
+                        <p>Personalized progress reviews and accountability.</p>
+                    </div>
+                    <div class="service-box">
+                        <h4>Custom Plan</h4>
+                        <p>Goal-based routines built around your current schedule.</p>
+                    </div>
+                    <div class="service-box">
+                        <h4>Support</h4>
+                        <p>Direct guidance and adjustments as your goals evolve.</p>
+                    </div>
+                </div>
+
+                <div class="coach-profile-actions">
+                    <button class="subscribe-btn" id="subscribe-btn">Subscribe Now</button>
+                    <a href="coaches.html" class="coach-link-btn">Back to Coaches</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/coach-profile.js"></script>
+</body>
+
+</html>

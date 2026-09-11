@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaches | FIT FOR ALL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/coaches.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">FIT FOR ALL</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="coaches.html" class="active">Coaches</a>
+            <a href="login.html" class="nav-btn" data-auth-action="logout">Log Out</a>
+        </div>
+    </nav>
+
+    <main class="coaches-page">
+
+        <section class="coach-header">
+            <span class="coach-eyebrow">Find your coach</span>
+            <h1>Choose a coach that fits <span>your goals</span></h1>
+            <p>
+                Browse certified coaches, compare their focus areas,
+                and subscribe to the one that matches your plan.
+            </p>
+        </section>
+
+        <div class="coach-toolbar">
+            <a href="#" class="coach-filter active">All Coaches</a>
+            <a href="#" class="coach-filter">Female Coaches</a>
+            <a href="#" class="coach-filter">Male Coaches</a>
+
+            <select id="price-filter" class="coach-price-filter" aria-label="Filter coaches by price">
+                <option value="all">All Prices</option>
+                <option value="under-30">Under $30</option>
+                <option value="30-34">$30 - $34</option>
+                <option value="35-plus">$35+</option>
+            </select>
+        </div>
+
+        <section class="coach-grid" id="coach-grid">
+
+            <article class="coach-card" data-gender="female" data-price="29">
+                <div class="coach-card-top">
+                    <div class="coach-profile-head">
+                        <div class="coach-avatar blue">A</div>
+                        <div>
+                            <h3 class="coach-name">Amina Rahman</h3>
+                            <span class="coach-role">Nutrition Coach</span>
+                        </div>
+                    </div>
+
+                    <div class="coach-tags">
+                        <span class="coach-tag">Weight Loss</span>
+                        <span class="coach-tag">Meal Plans</span>
+                    </div>
+                </div>
+
+                <div class="coach-card-body">
+                    <div class="coach-meta">
+                        <span>⭐ 4.9 Rating</span>
+                        <span>1.2k clients</span>
+                    </div>
+
+                    <p class="coach-description">
+                        Helps clients build sustainable eating habits,
+                        improve energy, and stay consistent with their plan.
+                    </p>
+
+                    <div class="coach-actions">
+                        <div class="coach-price">$29/mo</div>
+                        <a href="coach-profile.html?coach=amina" class="coach-link-btn">View Profile</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="coach-card" data-gender="male" data-price="34">
+                <div class="coach-card-top">
+                    <div class="coach-profile-head">
+                        <div class="coach-avatar tan">M</div>
+                        <div>
+                            <h3 class="coach-name">Mohamed Ali</h3>
+                            <span class="coach-role">Strength Coach</span>
+                        </div>
+                    </div>
+
+                    <div class="coach-tags">
+                        <span class="coach-tag">Muscle Gain</span>
+                        <span class="coach-tag">Gym Plans</span>
+                    </div>
+                </div>
+
+                <div class="coach-card-body">
+                    <div class="coach-meta">
+                        <span>⭐ 4.8 Rating</span>
+                        <span>980 clients</span>
+                    </div>
+
+                    <p class="coach-description">
+                        Specializes in strength training, progressive overload,
+                        and body recomposition for busy professionals.
+                    </p>
+
+                    <div class="coach-actions">
+                        <div class="coach-price">$34/mo</div>
+                        <a href="coach-profile.html?coach=mohamed" class="coach-link-btn">View Profile</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="coach-card" data-gender="female" data-price="26">
+                <div class="coach-card-top">
+                    <div class="coach-profile-head">
+                        <div class="coach-avatar purple">S</div>
+                        <div>
+                            <h3 class="coach-name">Sara Lewis</h3>
+                            <span class="coach-role">Fitness Coach</span>
+                        </div>
+                    </div>
+
+                    <div class="coach-tags">
+                        <span class="coach-tag">General Fitness</span>
+                        <span class="coach-tag">Home Workouts</span>
+                    </div>
+                </div>
+
+                <div class="coach-card-body">
+                    <div class="coach-meta">
+                        <span>⭐ 4.9 Rating</span>
+                        <span>1.6k clients</span>
+                    </div>
+
+                    <p class="coach-description">
+                        Builds full-body routines for beginners and active clients
+                        who want a balanced and sustainable routine.
+                    </p>
+
+                    <div class="coach-actions">
+                        <div class="coach-price">$26/mo</div>
+                        <a href="coach-profile.html?coach=sara" class="coach-link-btn">View Profile</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="coach-card" data-gender="male" data-price="39">
+                <div class="coach-card-top">
+                    <div class="coach-profile-head">
+                        <div class="coach-avatar green">D</div>
+                        <div>
+                            <h3 class="coach-name">Daniel Reed</h3>
+                            <span class="coach-role">Performance Coach</span>
+                        </div>
+                    </div>
+
+                    <div class="coach-tags">
+                        <span class="coach-tag">Recovery</span>
+                        <span class="coach-tag">Athletic Performance</span>
+                    </div>
+                </div>
+
+                <div class="coach-card-body">
+                    <div class="coach-meta">
+                        <span>⭐ 4.7 Rating</span>
+                        <span>760 clients</span>
+                    </div>
+
+                    <p class="coach-description">
+                        Focuses on performance, mobility, and recovery strategies
+                        to help athletes train smarter and avoid burnout.
+                    </p>
+
+                    <div class="coach-actions">
+                        <div class="coach-price">$39/mo</div>
+                        <a href="coach-profile.html?coach=daniel" class="coach-link-btn">View Profile</a>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/coaches.js"></script>
+</body>
+
+</html>

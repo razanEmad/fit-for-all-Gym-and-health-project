@@ -113,3 +113,41 @@ textarea {
     opacity: 0.88;
 }
 
+@media (max-width: 900px) {
+    .navbar {
+        padding: 18px 5%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        padding-top: 130px;
+    }
+
+    .navbar {
+        padding: 16px 5%;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links {
+        gap: 10px 16px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+}
+

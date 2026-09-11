@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Product Scanner | FIT for ALL</title>
+
+    <link rel="stylesheet" href="css/food-guide.css">
+</head>
+
+<body>
+
+    <main class="gym-coach-page">
+
+        <section class="coach-header">
+
+            <span class="eyebrow">AI PRODUCT SCANNER</span>
+
+            <h1>
+                Scan the product.<br>
+                <span>Check if it suits you.</span>
+            </h1>
+
+            <p>
+                Take a photo or upload a product from the supermarket,
+                and AI Product Scanner will tell you whether it fits your plan,
+                if you should buy it, and which dishes you can make with it.
+            </p>
+
+        </section>
+
+        <section class="upload-section">
+
+            <div class="upload-card">
+
+                <div class="upload-icon">
+                    🛒
+                </div>
+
+                <h2>
+                    Show us the product
+                </h2>
+
+                <p>
+                    Take a photo or upload a product image,
+                    and AI will check whether it matches your goals and recommend good uses for it.
+                </p>
+
+                <div class="upload-buttons">
+
+                    <label for="camera-input" class="btn btn-primary">
+                        📷 Take Photo
+                    </label>
+
+                    <input
+                        type="file"
+                        id="camera-input"
+                        accept="image/*"
+                        capture="environment"
+                        hidden
+                    >
+
+                    <label for="upload-input" class="btn btn-secondary">
+                        ↑ Upload Image
+                    </label>
+
+                    <input
+                        type="file"
+                        id="upload-input"
+                        accept="image/*"
+                        hidden
+                    >
+
+                </div>
+
+            </div>
+
+            <div
+                id="preview-section"
+                class="preview-section hidden"
+            >
+
+                <h3>Your product</h3>
+
+                <div class="image-wrapper">
+
+                    <img
+                        id="machine-preview"
+                        src=""
+                        alt="Selected product"
+                    >
+
+                </div>
+
+                <button
+                    id="analyze-btn"
+                    class="btn analyze-btn"
+                >
+                    Check Product
+                </button>
+
+            </div>
+
+        </section>
+
+        <section
+            id="loading-section"
+            class="loading-section hidden"
+        >
+
+            <div class="loader"></div>
+
+            <h3>
+                AI is checking this product for your plan...
+            </h3>
+
+            <p>
+                Comparing the product with your nutrition goals and suggesting smart meal ideas.
+            </p>
+
+        </section>
+
+        <section
+            id="result-section"
+            class="result-section hidden"
+        >
+
+            <div class="summary-card">
+
+                <span class="result-label">
+                    PRODUCT DETECTED
+                </span>
+
+                <h2 id="ingredient-summary">
+                    Product
+                </h2>
+
+                <p id="ingredient-description">
+                    AI analyzed the scanned product and compared it with your goal.
+                </p>
+
+            </div>
+
+            <div class="result-card">
+
+                <span class="result-label">
+                    PRODUCT ANALYSIS
+                </span>
+
+                <div
+                    id="dish-list"
+                    class="dish-grid"
+                >
+                </div>
+
+            </div>
+
+            <div class="personalized-card">
+
+                <span class="result-label">
+                    YOUR PERSONALIZED PLAN
+                </span>
+
+                <h2>
+                    Built around your goal
+                </h2>
+
+                <div class="plan-grid">
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🔥
+                        </span>
+
+                        <span class="plan-title">
+                            Calories
+                        </span>
+
+                        <strong id="target-calories">
+                            550 kcal
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            💪
+                        </span>
+
+                        <span class="plan-title">
+                            Protein
+                        </span>
+
+                        <strong id="target-protein">
+                            35 g
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🌾
+                        </span>
+
+                        <span class="plan-title">
+                            Carbs
+                        </span>
+
+                        <strong id="target-carbs">
+                            45 g
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🥑
+                        </span>
+
+                        <span class="plan-title">
+                            Fat
+                        </span>
+
+                        <strong id="target-fat">
+                            18 g
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="goal-message">
+
+                    <strong id="goal-title">
+                        Muscle Gain
+                    </strong>
+
+                    <p id="personalized-advice">
+                        This product can be included in your plan if it matches your current nutrition balance.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/product-scanner.js"></script>
+
+</body>
+
+</html>
