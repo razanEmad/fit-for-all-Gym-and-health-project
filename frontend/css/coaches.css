@@ -1,0 +1,423 @@
+:root {
+    --coach-primary: #c95c2c;
+    --coach-primary-dark: #a54c22;
+    --coach-primary-soft: #f6d8c2;
+    --coach-accent: #7f1d1d;
+    --coach-dark: #171717;
+    --coach-surface: #fffdfb;
+    --coach-surface-soft: #f5efe9;
+    --coach-border: #e4d4c8;
+    --coach-text: #1d1d1d;
+    --coach-muted: #665d58;
+    --coach-shadow: rgba(34, 34, 34, 0.12);
+}
+
+body {
+    background: linear-gradient(180deg, #f6f0eb 0%, #efe4dc 100%);
+}
+
+.coaches-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 24px 80px;
+}
+
+.coach-header {
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.coach-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(201, 92, 44, 0.12);
+    color: var(--coach-primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.coach-header h1 {
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.coach-header h1 span {
+    color: var(--coach-primary-dark);
+}
+
+.coach-header p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--coach-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.coach-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.coach-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--coach-surface);
+    border: 1px solid var(--coach-border);
+    color: var(--coach-text);
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+}
+
+.coach-filter:hover,
+.coach-filter.active {
+    background: var(--coach-primary);
+    border-color: var(--coach-primary);
+    color: #fff;
+}
+
+.coach-price-filter {
+    min-width: 170px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--coach-border);
+    background: var(--coach-surface);
+    color: var(--coach-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.coach-price-filter:focus {
+    border-color: var(--coach-primary);
+    box-shadow: 0 0 0 4px rgba(201, 92, 44, 0.12);
+}
+
+.coach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.coach-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--coach-surface);
+    border: 1px solid var(--coach-border);
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 18px 30px var(--coach-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.coach-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 36px rgba(34, 34, 34, 0.14);
+}
+
+.coach-card-top {
+    padding: 25px 22px 16px;
+    background: linear-gradient(135deg, rgba(201, 92, 44, 0.08), rgba(127, 29, 29, 0.04));
+}
+
+.coach-profile-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.coach-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--coach-primary), var(--coach-accent));
+}
+
+.coach-avatar.tan {
+    background: linear-gradient(135deg, #d98c53, #a54c22);
+}
+
+.coach-avatar.green {
+    background: linear-gradient(135deg, #5c8d73, #2d5d48);
+}
+
+.coach-avatar.blue {
+    background: linear-gradient(135deg, #4d79b5, #244e7b);
+}
+
+.coach-avatar.purple {
+    background: linear-gradient(135deg, #8e5fb5, #4d2d71);
+}
+
+.coach-avatar.orange {
+    background: linear-gradient(135deg, #ee8f4b, #cc5a2c);
+}
+
+.coach-name {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.coach-role {
+    color: var(--coach-primary-dark);
+    font-weight: 700;
+    font-size: 0.92rem;
+    display: block;
+    margin-top: 4px;
+}
+
+.coach-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.coach-tag {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(201, 92, 44, 0.1);
+    color: var(--coach-primary-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.coach-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    padding: 22px;
+}
+
+.coach-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--coach-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.coach-rating {
+    color: #d88a1a;
+}
+
+.coach-description {
+    color: var(--coach-muted);
+    line-height: 1.6;
+}
+
+.coach-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.coach-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--coach-dark);
+}
+
+.secondary-btn,
+.primary-btn,
+.subscribe-btn,
+.coach-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-btn,
+.subscribe-btn {
+    background: var(--coach-primary);
+    color: white;
+}
+
+.secondary-btn,
+.coach-link-btn {
+    background: #f4ede8;
+    color: var(--coach-dark);
+    border: 1px solid var(--coach-border);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.subscribe-btn:hover,
+.coach-link-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.96;
+}
+
+.coach-profile-shell {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 18px 90px;
+}
+
+.coach-profile-card {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 28px;
+    background: var(--coach-surface);
+    border: 1px solid var(--coach-border);
+    border-radius: 28px;
+    box-shadow: 0 24px 40px var(--coach-shadow);
+    overflow: hidden;
+}
+
+.coach-profile-left {
+    background: linear-gradient(180deg, rgba(201, 92, 44, 0.12), rgba(127, 29, 29, 0.04));
+    padding: 28px;
+}
+
+.coach-profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+    color: #fff;
+    font-size: 3.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--coach-primary), var(--coach-accent));
+}
+
+.coach-profile-left h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.coach-profile-role {
+    text-align: center;
+    color: var(--coach-primary-dark);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.coach-profile-card .coach-tags {
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.coach-profile-meta {
+    display: grid;
+    gap: 14px;
+}
+
+.coach-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--coach-border);
+    color: var(--coach-muted);
+    font-weight: 700;
+}
+
+.coach-stat strong {
+    color: var(--coach-text);
+}
+
+.coach-profile-right {
+    padding: 32px 28px 28px;
+}
+
+.coach-profile-right h3 {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+}
+
+.coach-profile-bio {
+    color: var(--coach-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.coach-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.service-box {
+    background: var(--coach-surface-soft);
+    border: 1px solid var(--coach-border);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.service-box h4 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.service-box p {
+    color: var(--coach-muted);
+    line-height: 1.5;
+    font-size: 0.94rem;
+}
+
+.coach-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+    .coach-profile-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .coaches-page {
+        padding-top: 30px;
+    }
+
+    .coach-header h1 {
+        font-size: 2.3rem;
+    }
+
+    .coach-card-body,
+    .coach-profile-right {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}

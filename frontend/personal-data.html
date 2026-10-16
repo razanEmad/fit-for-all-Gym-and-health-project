@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Personal Data | FIT FOR ALL</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+	<nav class="navbar">
+		<a href="index.html" class="logo">FIT FOR ALL</a>
+		<div class="nav-links">
+			<a href="index.html">Home</a>
+			<a href="profile.html">Profile</a>
+			<a href="login.html" class="nav-btn" data-auth-action="logout">Log Out</a>
+		</div>
+	</nav>
+
+	<main class="profile-page">
+		<section class="profile-header">
+			<span class="profile-kicker">ACCOUNT SETTINGS</span>
+			<h1>Update your personal data.</h1>
+			<p>Keep your name, email, and password current so your account stays secure and accurate.</p>
+		</section>
+
+		<form class="profile-form" id="personal-info-form">
+			<div class="profile-form-grid">
+				<div class="profile-field">
+					<label for="profile-name">Full name</label>
+					<input id="profile-name" name="name" type="text" value="Nada" autocomplete="name" required>
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-email">Email address</label>
+					<input id="profile-email" name="email" type="email" value="nada@example.com" autocomplete="email" required>
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-current-password">Current password</label>
+					<input id="profile-current-password" name="current_password" type="password" placeholder="Enter your current password" autocomplete="current-password">
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-new-password">New password</label>
+					<input id="profile-new-password" name="new_password" type="password" placeholder="Enter a new password" autocomplete="new-password">
+				</div>
+			</div>
+
+			<p class="profile-form-note">Leave the password fields empty if you do not want to change your password.</p>
+
+			<div class="profile-actions">
+				<a href="profile.html" class="profile-cancel">Cancel</a>
+				<button type="submit" class="profile-save">Save Personal Data</button>
+			</div>
+		</form>
+	</main>
+
+    <script src="js/config.js"></script>
+
+    <script>
+    const form = document.getElementById("personal-info-form");
+
+
+
+    // =========================
+    // Load current user data
+    // =========================
+
+    async function loadAccountInfo() {
+
+        const token = localStorage.getItem("token");
+
+        // User is not logged in
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE_URL}/api/auth/me`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            // JWT is invalid/expired
+            if (response.status === 401) {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const data = await response.json();
+
+            // Put current data inside the inputs
+            document.getElementById("profile-name").value = data.name;
+            document.getElementById("profile-email").value = data.email;
+
+        } catch (error) {
+
+            console.error("Error loading account information:", error);
+
+            alert("Could not load your account information.");
+        }
+    }
+
+
+    // =========================
+    // Update account
+    // =========================
+
+    form.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const token = localStorage.getItem("token");
+
+        // User is not logged in
+        if (!token) {
+            alert("Please log in first.");
+            window.location.href = "login.html";
+            return;
+        }
+
+
+        // Get form values
+        const name = document.getElementById("profile-name").value;
+        const email = document.getElementById("profile-email").value;
+
+        const currentPassword =
+            document.getElementById("profile-current-password").value;
+
+        const newPassword =
+            document.getElementById("profile-new-password").value;
+
+
+        // If user enters a new password,
+        // current password is required
+        if (newPassword && !currentPassword) {
+
+            alert("Please enter your current password.");
+
+            return;
+        }
+
+
+        // If current password is entered,
+        // new password is required
+        if (currentPassword && !newPassword) {
+
+            alert("Please enter your new password.");
+
+            return;
+        }
+
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/api/auth/account`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+
+                        current_password:
+                            currentPassword || null,
+
+                        new_password:
+                            newPassword || null
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            // =========================
+            // Handle errors
+            // =========================
+
+            if (!response.ok) {
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem("token");
+
+                    alert("Your session has expired. Please log in again.");
+
+                    window.location.href = "login.html";
+
+                    return;
+                }
+
+                alert(
+                    data.detail ||
+                    "Failed to update personal information."
+                );
+
+                return;
+            }
+
+
+            // =========================
+            // Success
+            // =========================
+
+            alert(
+                "Personal information updated successfully!"
+            );
+
+            window.location.href = "profile.html";
+
+
+        } catch (error) {
+
+            console.error("Error updating account:", error);
+
+            alert("Could not connect to the server.");
+        }
+    });
+
+
+    // Load the user's information
+    loadAccountInfo();
+</script>
+</body>
+
+</html>

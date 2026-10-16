@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Your Profile | FIT FOR ALL</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+	<nav class="navbar">
+		<a href="index.html" class="logo">FIT FOR ALL</a>
+		<div class="nav-links">
+			<a href="index.html">Home</a>
+			<a href="profile.html">Profile</a>
+			<a href="login.html" class="nav-btn" data-auth-action="logout">Log Out</a>
+		</div>
+	</nav>
+
+	<main class="profile-page">
+		<section class="profile-header">
+			<span class="profile-kicker">YOUR PERSONAL PLAN</span>
+			<h1>Build a plan that fits you.</h1>
+			<p>Keep your details up to date so FIT FOR ALL can personalize your guidance.</p>
+		</section>
+
+		<form class="profile-form" id="profile-form">
+			<div class="profile-form-grid">
+				<!-- Age --> 
+				<div class="profile-field">
+					<label for="profile-age">Age</label>
+					<input id="profile-age" name="age" type="number" min="1" max="120" required >
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-weight">Weight (kg)</label>
+					<input id="profile-weight" name="weight" type="number" min="1" required>
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-height">Height (cm)</label>
+					<input id="profile-height" name="height" type="number" min="1" required>
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-goal">Primary goal</label>
+					<select id="profile-goal" name="goal" required>
+						<option value="weight-loss" >Weight loss</option>
+						<option value="muscle-gain">Muscle gain</option>
+						<option value="fitness">General fitness</option>
+					</select>
+				</div>
+
+				<div class="profile-field">
+					<label for="profile-budget">Food budget</label>
+					<select id="profile-budget" name="budget" required>
+						<option value="low" >Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
+				</div>
+			
+
+				<!-- Allergies -->
+				<div class="profile-field">
+					<label for="profile-allergies"> Allergies </label>
+					<input id="profile-allergies" name="allergies" type="text" placeholder="e.g. peanuts, milk" >
+					<small> Separate multiple allergies with commas. </small>
+				</div>
+				<!-- Dietary Preferences -->
+				<div class="profile-field">
+					<label for="profile-dietary-preferences"> Dietary preferences </label>
+					<input id="profile-dietary-preferences" name="dietary_preferences" type="text" placeholder="e.g. vegetarian, low-carb" >
+					<small> Separate multiple preferences with commas. </small>
+				</div>
+
+		</div>
+
+			<div class="profile-actions">
+				<a href="profile.html" class="profile-cancel">Cancel</a>
+				<button type="submit" class="profile-save">Save Profile</button>
+			</div>
+		</form>
+	</main>
+
+	<script src="js/config.js"></script>
+
+	<script>
+    const profileForm = document.getElementById("profile-form");
+
+
+
+    // ==========================================
+    // Load existing health profile
+    // ==========================================
+
+    async function loadProfile() {
+
+        const token = localStorage.getItem("token");
+
+        // User is not logged in
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE_URL}/api/profile/`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+
+            // JWT is invalid or expired
+            if (response.status === 401) {
+
+                localStorage.removeItem("token");
+
+                alert("Your session has expired. Please log in again.");
+
+                window.location.href = "login.html";
+
+                return;
+            }
+
+
+            const data = await response.json();
+
+
+            // No health profile created yet
+            if (!response.ok) {
+
+                alert(data.detail || "Could not load your profile.");
+
+                return;
+            }
+
+
+            // If profile doesn't exist yet
+            if (data.message === "Health profile not created yet") {
+
+                return;
+            }
+
+
+            // ==========================================
+            // Put MongoDB data into the form
+            // ==========================================
+
+            document.getElementById("profile-age").value =
+                data.age;
+
+            document.getElementById("profile-weight").value =
+                data.weight;
+
+            document.getElementById("profile-height").value =
+                data.height;
+
+            document.getElementById("profile-goal").value =
+                data.goal;
+
+            document.getElementById("profile-budget").value =
+                data.budget;
+
+
+            // Convert allergies array into text
+            document.getElementById("profile-allergies").value =
+                (data.allergies || []).join(", ");
+
+
+            // Convert dietary preferences array into text
+            document.getElementById("profile-dietary-preferences").value =
+                (data.dietary_preferences || []).join(", ");
+
+
+        } catch (error) {
+
+            console.error("Error loading profile:", error);
+
+            alert("Could not connect to the server.");
+        }
+    }
+
+
+
+    // ==========================================
+    // Update health profile
+    // ==========================================
+
+    profileForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+
+        const token = localStorage.getItem("token");
+
+
+        // User must be logged in
+        if (!token) {
+
+            alert("Please log in first.");
+
+            window.location.href = "login.html";
+
+            return;
+        }
+
+
+        // ==========================================
+        // Get values from form
+        // ==========================================
+
+        const age =
+            Number(document.getElementById("profile-age").value);
+
+        const weight =
+            Number(document.getElementById("profile-weight").value);
+
+        const height =
+            Number(document.getElementById("profile-height").value);
+
+        const goal =
+            document.getElementById("profile-goal").value;
+
+        const budget =
+            document.getElementById("profile-budget").value;
+
+
+        // Convert comma-separated text → array
+        const allergies =
+            document
+                .getElementById("profile-allergies")
+                .value
+                .split(",")
+                .map(item => item.trim())
+                .filter(item => item !== "");
+
+
+        const dietary_preferences =
+            document
+                .getElementById("profile-dietary-preferences")
+                .value
+                .split(",")
+                .map(item => item.trim())
+                .filter(item => item !== "");
+
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/api/profile/`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+
+                        age: age,
+                        weight: weight,
+                        height: height,
+                        goal: goal,
+                        budget: budget,
+                        allergies: allergies,
+                        dietary_preferences: dietary_preferences
+
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            // ==========================================
+            // Handle errors
+            // ==========================================
+
+            if (!response.ok) {
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem("token");
+
+                    alert(
+                        "Your session has expired. Please log in again."
+                    );
+
+                    window.location.href = "login.html";
+
+                    return;
+                }
+
+
+                alert(
+                    data.detail ||
+                    "Failed to update profile."
+                );
+
+                return;
+            }
+
+
+            // ==========================================
+            // Success
+            // ==========================================
+
+            alert("Profile saved successfully!");
+
+            window.location.href = "profile.html";
+
+
+        } catch (error) {
+
+            console.error("Error updating profile:", error);
+
+            alert("Could not connect to the server.");
+        }
+    });
+
+
+
+    // ==========================================
+    // Load profile when page opens
+    // ==========================================
+
+    loadProfile();
+</script>
+</body>
+
+</html>

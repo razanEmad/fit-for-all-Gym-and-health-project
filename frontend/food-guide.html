@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Food Guide | FIT for ALL</title>
+
+    <link rel="stylesheet" href="css/food-guide.css">
+</head>
+
+<body>
+
+    <main class="gym-coach-page">
+
+        <!-- Header -->
+        <section class="coach-header">
+
+            <span class="eyebrow">AI FOOD GUIDE</span>
+
+            <h1>
+                Eat smarter.<br>
+                <span>Fuel your goals.</span>
+            </h1>
+
+            <p>
+                Take a photo or upload ingredients, and AI Food Guide
+                will recommend dishes that fit your saved profile plan.
+            </p>
+
+        </section>
+
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+
+            <div class="upload-card">
+
+                <div class="upload-icon">
+                    🥗
+                </div>
+
+                <h2>
+                    Show us your ingredients
+                </h2>
+
+                <p>
+                    Take a photo or upload an image of the ingredients you have,
+                    and AI will recommend dishes that fit your goal.
+                </p>
+
+                <div class="upload-buttons">
+
+                    <label for="camera-input" class="btn btn-primary">
+                        📷 Take Photo
+                    </label>
+
+                    <input
+                        type="file"
+                        id="camera-input"
+                        accept="image/*"
+                        capture="environment"
+                        multiple
+                        hidden
+                    >
+
+                    <label for="upload-input" class="btn btn-secondary">
+                        ↑ Upload Image
+                    </label>
+
+                    <input
+                        type="file"
+                        id="upload-input"
+                        accept="image/*"
+                        multiple
+                        hidden
+                    >
+
+                </div>
+
+            </div>
+
+            <div
+                id="preview-section"
+                class="preview-section hidden"
+            >
+
+                <h3>Your ingredients</h3>
+
+                <div
+                    id="image-preview-list"
+                    class="image-wrapper image-preview-list"
+                ></div>
+
+                <button
+                    id="analyze-btn"
+                    class="btn analyze-btn"
+                >
+                    Recommend Dishes
+                </button>
+
+            </div>
+
+        </section>
+
+        <section
+            id="loading-section"
+            class="loading-section hidden"
+        >
+
+            <div class="loader"></div>
+
+            <h3>
+                AI is reviewing your ingredients...
+            </h3>
+
+            <p>
+                Matching the foods in your image with personalized meal ideas.
+            </p>
+
+        </section>
+
+        <section
+            id="result-section"
+            class="result-section hidden"
+        >
+
+            <div class="summary-card">
+
+                <span class="result-label">
+                    INGREDIENTS DETECTED
+                </span>
+
+                <h2 id="ingredient-summary">
+                    Fresh ingredients
+                </h2>
+
+                <p id="ingredient-description">
+                    AI matched your ingredients with dishes that fit your goal.
+                </p>
+
+            </div>
+
+            <div class="result-card">
+
+                <span class="result-label">
+                    RECOMMENDED DISHES
+                </span>
+
+                <div
+                    id="dish-list"
+                    class="dish-grid"
+                >
+                </div>
+
+            </div>
+
+            <div class="personalized-card">
+
+                <span class="result-label">
+                    YOUR PERSONALIZED PLAN
+                </span>
+
+                <h2>
+                    Built around your goal
+                </h2>
+
+                <div class="plan-grid">
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🔥
+                        </span>
+
+                        <span class="plan-title">
+                            Calories
+                        </span>
+
+                        <strong id="target-calories">
+                            550 kcal
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            💪
+                        </span>
+
+                        <span class="plan-title">
+                            Protein
+                        </span>
+
+                        <strong id="target-protein">
+                            35 g
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🌾
+                        </span>
+
+                        <span class="plan-title">
+                            Carbs
+                        </span>
+
+                        <strong id="target-carbs">
+                            45 g
+                        </strong>
+
+                    </div>
+
+                    <div class="plan-item">
+
+                        <span class="plan-icon">
+                            🥑
+                        </span>
+
+                        <span class="plan-title">
+                            Fat
+                        </span>
+
+                        <strong id="target-fat">
+                            18 g
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="goal-message">
+
+                    <strong id="goal-title">
+                        Muscle Gain
+                    </strong>
+
+                    <p id="personalized-advice">
+                        Focus on protein-rich dishes and balanced carbs to keep your meals satisfying and aligned with your target.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/food-guide.js"></script>
+
+</body>
+
+</html>
